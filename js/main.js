@@ -66,6 +66,19 @@ for (let i = 0; i < mainArray.length; i++){
     </div>`;
 }; 
 
+document.getElementById(`my-after-carousel`).innerHTML=`
+<div>
+    <button type="text" class="btn btn-warning mb-3" id="reverse">Inverti scorrimento</button>
+</div>
+<div>
+    <div class="form-group mb-2">
+        <label for="exampleInputEmail1">Link all'immagine</label>
+        <input type="text" id="insertNewImageLink" placeholder="Aggiungi la nuova immagine" class="ms-2">
+    </div>
+    <button type="submit" class="btn btn-primary">Aggiungi</button>
+</div>
+`;
+
 // Creo una variabile con cui prendo tramite la classe l'elemento dell'html dove inserire i nuovi elementi
 const mainCarousel = document.querySelector(".my-carousel-images");
 mainCarousel.innerHTML=carouselContent;
@@ -123,4 +136,8 @@ function backImages() {
 
 const goToNextImage = setInterval ( nextImage, 3000);
 
-clearInterval(goToNextImage);
+document.getElementById(`reverse`).addEventListener(`click`, function(){
+    clearInterval(goToNextImage);
+    setInterval ( backImages, 3000)
+})
+
