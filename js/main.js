@@ -1,7 +1,5 @@
 /**
  *
- *
- *
 Riprendiamo l'esercizio carosello e rifacciamolo, questa volta usando gli oggetti, prendendo come riferimento il codice scritto 
 oggi insieme a lezione, che troverete direttamente nella mia repository di github a questo link: [link github]
 
@@ -16,9 +14,8 @@ disponibili nel carosello stesso.
 
 Bonus 2:
 E se volessi un bottone per invertire la "direzione" del carosello?
-
- *
  */
+
 // Array di oggetti fornito
 const mainArray = [
     {
@@ -61,35 +58,36 @@ for (let i = 0; i < mainArray.length; i++){
             <h3>${mainArray[i].place}</h3>
             <p>${mainArray[i].text}</p>
         </div>
-    </div>
-    `
+    </div>`;
 
     thumbnailsContent += `
     <div class="my-thumbnails-container d-inline-block ${i != 0 ? 'my-filter' : 'my-border-white'}">
     <img class="img-fluid" src="${mainArray[i].image}" alt="${mainArray[i].place}">
-    </div>`
+    </div>`;
 }; 
 
-// Creo una variabile con cui prendo tramite id l'elemento dell'html dove inserire i nuovi elementi
+// Creo una variabile con cui prendo tramite la classe l'elemento dell'html dove inserire i nuovi elementi
 const mainCarousel = document.querySelector(".my-carousel-images");
 mainCarousel.innerHTML=carouselContent;
 
-// Creo una variabile con cui prendo tramite id l'elemento dell'html dove inserire i nuovi elementi
+// Creo una variabile con cui prendo tramite la classe l'elemento dell'html dove inserire i nuovi elementi
 const thumbnailsContainer = document.querySelector(".my-thumbnails");
 thumbnailsContainer.innerHTML+=thumbnailsContent;
 
-// Creo una variabile con cui prendo tramite id l'elemento dell'html dove inserire i nuovi elementi
+// Creo una variabile con cui prendo tramite la classe l'elemento dell'html a cui aggiungere e sottrarre le classi
 const carouselElements = document.getElementsByClassName(`main-carousel`);
 
-// Creo una variabile con cui prendo tramite id l'elemento dell'html dove inserire i nuovi elementi
+// Creo una variabile con cui prendo tramite la classe l'elemento dell'html a cui aggiungere e sottrarre le classi
 const thumbnailsElements = document.getElementsByClassName("my-thumbnails-container");
 
 // Creo una variabile a cui do di base valore 0 e che mi servirà come posizione di partenza per l'addEventListener
 let index = 0;
 
-// addEventListener su next-arrow
+// addEventListener su next-button
 const nextButton = document.querySelector(".my-next");
-nextButton.addEventListener(`click`, function() {
+nextButton.addEventListener(`click`, nextImage);
+
+function nextImage() {
     carouselElements[index].classList.add(`d-none`);
     thumbnailsElements[index].classList.remove(`my-border-white`);
     thumbnailsElements[index].classList.add(`my-filter`);
@@ -102,12 +100,13 @@ nextButton.addEventListener(`click`, function() {
     carouselElements[index].classList.remove(`d-none`);
     thumbnailsElements[index].classList.add(`my-border-white`);
     thumbnailsElements[index].classList.remove(`my-filter`);
+}
 
-})
-
-// addEventListener su up-arrow
+// addEventListener su prev-button
 const prevButton = document.querySelector(".my-previous");
-prevButton.addEventListener(`click`, function() {
+prevButton.addEventListener(`click`, backImages);
+
+function backImages() {
     carouselElements[index].classList.add(`d-none`);
     thumbnailsElements[index].classList.remove(`my-border-white`);
     thumbnailsElements[index].classList.add(`my-filter`);
@@ -120,5 +119,8 @@ prevButton.addEventListener(`click`, function() {
     carouselElements[index].classList.remove(`d-none`);
     thumbnailsElements[index].classList.add(`my-border-white`);
     thumbnailsElements[index].classList.remove(`my-filter`);
+}
 
-})
+const goToNextImage = setInterval ( nextImage, 3000);
+
+clearInterval(goToNextImage);
