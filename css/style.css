@@ -5,17 +5,23 @@ body{
 div.my-carousel-container{
     min-height: 700px;
     min-width:800px ;
-    background-color: aquamarine;
 }
 
 div.my-carousel-images{
-    background-color: cadetblue;
+    display: flex;
     min-height: 540px;
+    max-height: 540px;
+}
+
+div.my-carousel-images img{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
 }
 
 div.my-thumbnails{
-    background-color: violet;
     min-height: 160px;
+    display: flex;
 }
 
 div.my-previous,
@@ -51,4 +57,27 @@ div.my-next > span::after{
     font-weight: 900;
     content: "\f520";
     line-height: 30px;
+}
+
+div.main-carousel{
+    width: 100%;
+    height: 100%;
+}
+
+div.my-thumbnails-container{
+    flex-basis: 20%;
+}
+
+div.my-thumbnails-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.my-filter{
+    filter: brightness(50%);
+}
+
+.my-border-white{
+    border: 3px solid white;
 }
