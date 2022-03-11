@@ -9,9 +9,8 @@ div.my-carousel-container{
 
 div.my-carousel-images{
     display: flex;
-    max-width: 960px;
-    min-height: 540px;
-    max-height: 540px;
+    width: 960px;
+    height: 540px;
     object-fit: cover;
 }
 
@@ -22,8 +21,8 @@ div.my-carousel-images img{
 }
 
 div.my-thumbnails{
-    max-width: 960px;
-    min-height: 160px;
+    width: 960px;
+    height: 160px;
     display: flex;
 }
 
