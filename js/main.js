@@ -134,10 +134,10 @@ function backImages() {
     thumbnailsElements[index].classList.remove(`my-filter`);
 }
 
-/* const goToNextImage = setInterval ( nextImage, 3000);
+const goToNextImage = setInterval ( nextImage, 3000);
 
 document.getElementById(`reverse`).addEventListener(`click`, function(){
     clearInterval(goToNextImage);
     const reverse = setInterval ( backImages, 3000);
-}) */
+})
 
