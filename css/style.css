@@ -19,6 +19,10 @@ div.my-carousel-images img{
     height: 100%;
     object-fit: cover;
 }
+div.my-carousel-info{
+    width: 960px;
+    background-color: rgba(0, 0, 0, .6);
+}
 
 div.my-thumbnails{
     width: 960px;

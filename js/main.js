@@ -48,13 +48,14 @@ const mainArray = [
 // Inizializzo le variabili con cui verranno inseriti gli elementi nell'HTML
 let carouselContent = ``;
 let thumbnailsContent = ``;
+let changeDirection = false;
 
 // Creo un ciclo for per inserire i contenuti degli array nei div
 for (let i = 0; i < mainArray.length; i++){
     carouselContent += `
     <div class="main-carousel position-relative ${i != 0 ? 'd-none' : ''}">
         <img src="${mainArray[i].image}" alt="${mainArray[i].place}">
-        <div class="text-white text-end position-absolute bottom-0 end-0 pe-2">
+        <div class="my-carousel-info text-white text-center position-absolute bottom-0 pe-2">
             <h3>${mainArray[i].place}</h3>
             <p>${mainArray[i].text}</p>
         </div>
@@ -98,7 +99,8 @@ let index = 0;
 
 // addEventListener su next-button
 const nextButton = document.querySelector(".my-next");
-nextButton.addEventListener(`click`, nextImage);
+
+nextButton.addEventListener(`click`, nextImage)
 
 function nextImage() {
     carouselElements[index].classList.add(`d-none`);
@@ -114,30 +116,57 @@ function nextImage() {
     thumbnailsElements[index].classList.add(`my-border-white`);
     thumbnailsElements[index].classList.remove(`my-filter`);
 }
-
 // addEventListener su prev-button
 const prevButton = document.querySelector(".my-previous");
-prevButton.addEventListener(`click`, backImages);
-
-function backImages() {
-    carouselElements[index].classList.add(`d-none`);
-    thumbnailsElements[index].classList.remove(`my-border-white`);
-    thumbnailsElements[index].classList.add(`my-filter`);
-
-    if (index === 0){
+prevButton.addEventListener(`click`, function(){
+    backImages(carouselElements, thumbnailsElements, index, `d-none`, `my-border-white`, `my-filter`, mainArray );
+    console.log(index)
+        if (index === 0){
         index = mainArray.length - 1;
     } else {
         index--;
     }
-    carouselElements[index].classList.remove(`d-none`);
-    thumbnailsElements[index].classList.add(`my-border-white`);
-    thumbnailsElements[index].classList.remove(`my-filter`);
-}
-
-const goToNextImage = setInterval ( nextImage, 3000);
-
-document.getElementById(`reverse`).addEventListener(`click`, function(){
-    clearInterval(goToNextImage);
-    const reverse = setInterval ( backImages, 3000);
 })
 
+function backImages(mainElement, thumbElement, indexScroll, firstClasstoswitch, secondClassSwitch, thirdClassToSwitch, arrayOfObjects) {
+    mainElement[indexScroll].classList.add(firstClasstoswitch);
+    thumbElement[indexScroll].classList.remove(secondClassSwitch);
+    thumbElement[indexScroll].classList.add(thirdClassToSwitch);
+
+    if (indexScroll === 0){
+        indexScroll = arrayOfObjects.length - 1;
+    } else {
+        indexScroll--;
+    }
+    mainElement[indexScroll].classList.remove(firstClasstoswitch);
+    thumbElement[indexScroll].classList.add(secondClassSwitch);
+    thumbElement[indexScroll].classList.remove(thirdClassToSwitch);
+}
+
+
+// function nextImages(mainElement, thumbElement, indexScroll, firstClasstoswitch, secondClassSwitch, thirdClassToSwitch, arrayOfObjects) {
+//     mainElement[indexScroll].classList.add(firstClasstoswitch);
+//     thumbElement[indexScroll].classList.remove(secondClassSwitch);
+//     thumbElement[indexScroll].classList.add(thirdClassToSwitch);
+
+//     if (index === mainArray.length -1){
+//         index = 0;
+//     } else {
+//         index++;
+//     }
+//     mainElement[indexScroll].classList.remove(firstClasstoswitch);
+//     thumbElement[indexScroll].classList.add(secondClassSwitch);
+//     thumbElement[indexScroll].classList.remove(thirdClassToSwitch);
+// }
+
+document.getElementById(`reverse`).addEventListener(`click`, function(){
+    changeDirection = !changeDirection;
+})
+
+setInterval(function() {
+    if(changeDirection){
+        nextButton.click();
+    } else {
+        prevButton.click();
+    }
+}, 3000)
